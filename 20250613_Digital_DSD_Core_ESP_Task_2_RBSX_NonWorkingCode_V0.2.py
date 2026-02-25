@@ -1,5 +1,5 @@
 #collects and validates the Client_ID number
-def get_check_client_ID ()
+def get_check_client_ID ():
     
     valid = False
 
@@ -7,11 +7,13 @@ def get_check_client_ID ()
         clientID = input('Please enter the Client ID number: ')
         if len(clientID) > 10 :
             print('Client ID must be 10 characters long')
+        elif len(clientID) < 10:
+            print('Client ID must be 10 characters long')
 
             valid = False
         else:
             print('Client ID accepted')
-            
+            valid = True
             return clientID
            
   
@@ -31,7 +33,7 @@ def get_check_investment_amount ():
         else:
             print('Investment amount accepted')
 
-            return amount
+            return float(amount)
 
 
 #collects and checks types of investment
@@ -45,7 +47,7 @@ def investment_type (investmentAmount):
         print('2. Managed stock investments')
         choice = input('Enter choice here: ')
 
-        if choice == "1" and investmentAmount >= 20000:
+        if choice == "1" and float(investmentAmount) >= 20000:
             print('The amount you wish to invest is too high for the standard savings plan.')
             print('You will be shown an example for managed stock investments instead')   
             choice = 2
@@ -58,6 +60,7 @@ def investment_type (investmentAmount):
 #add each year's investment and calculates the returns, fees and profits for the savings plan option
 def savings_plan (investmentAmount):
     maximumValue = 0
+
     minimumValue = 0
     feesMax = 0
     feesMin = 0
@@ -106,11 +109,11 @@ def managed_stocks (investmentAmount):
 
 
         minimumValue = minimumValue + investmentAmount
-        minimumValue = minimumValue + (minimumValue * 0.40)
+        minimumValue = minimumValue + (minimumValue * 0.04)
 
 
-        feesMax = feesMax + (maximumValue * 0.013)
-        feesMin = feesMin + (minimumValue * 0.013) 
+        feesMax = feesMax + (maximumValue * 0.13)
+        feesMin = feesMin + (minimumValue * 0.13) 
 
     maxProfit = maximumValue - ((investmentAmount * 5) + feesMax)
     minProfit = minimumValue - ((investmentAmount * 5) + feesMin)
@@ -145,5 +148,5 @@ def main ():
     else:
         managed_stocks(investmentAmount)
 
-man()
+main()
 
